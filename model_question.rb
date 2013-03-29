@@ -27,7 +27,7 @@ class Question < AAQPModel
     GROUP BY questions.id
     ORDER BY COUNT(question_likes.question_id) DESC
     LIMIT ?
-    SQL
+    SQL #REV: cool! i didn't know aobut the limit thing.
 
     result_array = AAQPDatabase.instance.execute(query, n)
     Question.make_instances(result_array)
@@ -43,7 +43,8 @@ class Question < AAQPModel
     SQL
 
     result_array = AAQPDatabase.instance.execute(query, n)
-    Question.make_instances(result_array)
+    Question.make_instances(result_array) #REV: I see how you do this, but you might consider mapping
+    #REV: the result array to an array of Question.new()'s.
   end
 
   attr_accessor :title, :body, :author_id
@@ -56,7 +57,7 @@ class Question < AAQPModel
     @id = hash["id"]
   end
 
-  def save
+  def save #REV: i may split up this into an insert and update method, and then have save call them from the if statement.
     if self.id.nil?
       insert = <<-SQL
       INSERT INTO questions ('title', 'body', 'author_id')
