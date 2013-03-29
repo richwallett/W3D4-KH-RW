@@ -1,4 +1,4 @@
-require 'debugger'
+require 'debugger' #REV: great job guys! sorry if my comments sound rude...
 require 'sqlite3'
 require 'singleton'
 require './aaqp_model'
