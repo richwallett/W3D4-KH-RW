@@ -34,7 +34,7 @@ class QuestionReply < AAQPModel
 
   end
 
-  def save
+  def save #REV: this method is a bit long, split it up.
     if self.id.nil?
       insert = <<-SQL
       INSERT INTO question_replies ('parent_question_id', 'body', 'author_id', 'parent_reply_id')
