@@ -1,6 +1,5 @@
-
-class Tags
-  # def self.most_popular
+class Tags #REV: nice, i didn't get to this. pretty cool!
+  # def self.most_popular #REV: you should consider cleaning out all of the lines you have commented out.
     # query = <<-SQL
     # SELECT COUNT(*)
     # FROM tags JOIN question_tags ON tags.id = question_tags.tag_id
