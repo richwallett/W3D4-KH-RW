@@ -1,5 +1,5 @@
 class User < AAQPModel
-  SQL_TABLE_NAME = 'users'
+  SQL_TABLE_NAME = 'users' #REV: why do you need this? For inheritance reasons? It's a bit confusing.
 
   def self.find_by_name(fname, lname)
     query = <<-SQL
@@ -76,7 +76,7 @@ class User < AAQPModel
       WHERE uq.id = :first_id
       GROUP BY uq.id)
     )  AS average
-    SQL
+    SQL #REV: sick query.
 
     results_array = AAQPDatabase.instance.execute(query,
                     {first_id: self.id, second_id: self.id } )
