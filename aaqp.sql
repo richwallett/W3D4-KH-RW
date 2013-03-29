@@ -1,3 +1,4 @@
+-- Nice! I may split out my INSERTS into a separate .sql file
 CREATE TABLE users (
   id INTEGER PRIMARY KEY,
 fname VARCHAR(20) NOT NULL,
