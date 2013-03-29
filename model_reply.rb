@@ -34,4 +34,33 @@ class QuestionReply < AAQPModel
 
   end
 
+  def save
+    if self.id.nil?
+      insert = <<-SQL
+      INSERT INTO question_replies ('parent_question_id', 'body', 'author_id', 'parent_reply_id')
+      VALUES (:parent_question_id, :body, :author_id, :parent_reply_id)
+      SQL
+
+      insert_response = AAQPDatabase.instance.execute(insert,
+          {parent_question_id: self.parent_question_id,
+            body: self.body,
+            author_id: self.author_id,
+            parent_reply_id: self.parent_reply_id})
+    else
+      update = <<-SQL
+      UPDATE question_replies
+        SET parent_question_id = :parent_question_id, body = :body, author_id = :author_id,
+            parent_reply_id = :parent_reply_id
+        WHERE question_replies.id = :id
+      SQL
+
+      update_response = AAQPDatabase.instance.execute(update,
+          {parent_question_id: self.parent_question_id,
+            body: self.body,
+            author_id: self.author_id,
+            parent_reply_id: self.parent_reply_id,
+            id: self.id })
+    end
+  end
+
 end

@@ -56,6 +56,32 @@ class Question < AAQPModel
     @id = hash["id"]
   end
 
+  def save
+    if self.id.nil?
+      insert = <<-SQL
+      INSERT INTO questions ('title', 'body', 'author_id')
+      VALUES (:title, :body, :author_id)
+      SQL
+
+      insert_response = AAQPDatabase.instance.execute(insert,
+          {title: self.title,
+            body: self.body,
+            author_id: self.author_id})
+    else
+      update = <<-SQL
+      UPDATE questions
+        SET title = :title, body = :body, author_id = :author_id
+        WHERE questions.id = :id
+      SQL
+
+      update_response = AAQPDatabase.instance.execute(update,
+          {title: self.title,
+            body: self.body,
+            author_id: self.author_id,
+            id: self.id })
+    end
+  end
+
   def num_likes
     query = <<-SQL
     SELECT COUNT(*)

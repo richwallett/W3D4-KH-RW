@@ -1,4 +1,6 @@
 class User < AAQPModel
+  SQL_TABLE_NAME = 'users'
+
   def self.find_by_name(fname, lname)
     query = <<-SQL
     SELECT *
