@@ -1,6 +1,6 @@
 class Question < AAQPModel
   def self.asking_student(question_id)
-    query = <<-SQL
+    query = <<-SQL # REV Indent your query for better usability
     SELECT users.id, users.fname, users.lname, users.is_instructor
     FROM users JOIN questions ON users.id = questions.author_id
     WHERE questions.id = ?
@@ -92,7 +92,7 @@ class Question < AAQPModel
     SQL
 
     results_array = AAQPDatabase.instance.execute(query, self.id)
-    results_array[0]['COUNT(*)']
+    results_array[0]['COUNT(*)'] # REV You might consider aliasing this
   end
 
   def followers

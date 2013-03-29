@@ -22,7 +22,7 @@ class QuestionReply < AAQPModel
     QuestionReply.make_instances(results_array)
   end
 
-  def self.find(id)
+  def self.find(id) # REV convention says to put class methods at the top
     query = <<-SQL
     SELECT *
     FROM question_replies
