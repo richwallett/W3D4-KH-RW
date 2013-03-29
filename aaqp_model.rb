@@ -1,3 +1,4 @@
+# REV: would have mapped this but you know that 
 class AAQPModel
   def self.make_instances(result_array)
     model_array = []
